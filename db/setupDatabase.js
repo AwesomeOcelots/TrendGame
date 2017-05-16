@@ -1,12 +1,15 @@
-//set up the database if not exist
-// This file should be run once from the command line to initialize the db schema.  Be sure to edit the url const with the target url.
+
 const pg = require('pg');
 
-const url = '<INSERT DB URL HERE FOR SCHEMA UPLOAD>';
+const url = '127.0.0.1';
 
 var db = require('knex')({
   client: 'pg',
-  connection: url + '?ssl=true'
+  connection: { 
+    host: '127.0.0.1',
+    user: 'thecomputer',
+    password: '',
+    database: 'trendgame'}
 });
 
 db.schema.hasTable('trends').then(function (exists) {

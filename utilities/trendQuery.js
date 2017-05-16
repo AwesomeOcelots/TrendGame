@@ -7,7 +7,6 @@ module.exports = (keyword, callback) => {
     keyword: keyword,
     startTime: backDateByMonths(15),
   };
-
   googleTrends.interestOverTime(options)
     .then(results => {
       callback(null, sanitizeTrend(results));

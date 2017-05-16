@@ -6,7 +6,7 @@ module.exports = (rawTimeline) => {
   } catch (error) {
     throw error;
   }
-
+  console.log()
   return parsedTimeline.default.timelineData.map((point) => {
     return {
       date: parseInt(point.time),
