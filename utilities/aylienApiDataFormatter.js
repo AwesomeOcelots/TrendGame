@@ -1,3 +1,5 @@
+const dateFormat = require('dateformat');
+
 const formatAylienData = (data) => {
 
   let dataParsed = {};
@@ -11,6 +13,7 @@ const formatAylienData = (data) => {
   return dataParsed.stories.map((story) => {
     let formattedStory = {};
     formattedStory.headline = story.title;
+    formattedStory.date = dateFormat(story.publishedAt, 'mmmm dS, yyyy');
     formattedStory.url = story.links.permalink;
     if (story.media && story.media.length > 0) {
       formattedStory.media = story.media[0].url;

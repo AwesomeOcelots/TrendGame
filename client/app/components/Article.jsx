@@ -24,6 +24,7 @@ class Article extends React.Component {
             />
             <div className="card-block">
               <h3 className="h4 card-title">{this.props.story.headline}</h3>
+              <h5>{this.props.story.date}</h5>
               <p className="card-text">{this.props.story.summary}</p>
             </div>
           </div>
