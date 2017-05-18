@@ -46,6 +46,7 @@ class App extends React.Component {
           end: timeline[timeline.length - 1].date,
           storyPoint: this.findStoryPoint(timeline),
           data: this.makeChartPoints(timeline),
+          related: response.data.related,
           loader: false
         });
         return this.postSearchHistory(trend);
