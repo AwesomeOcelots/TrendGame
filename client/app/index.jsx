@@ -14,7 +14,8 @@ class App extends React.Component {
       trend: '',
       storyPoint: {},
       loader: false,
-      history: []
+      history: [],
+      related: []
     };
     this.collectData = this.collectData.bind(this);
   }
@@ -45,6 +46,7 @@ class App extends React.Component {
           end: timeline[timeline.length - 1].date,
           storyPoint: this.findStoryPoint(timeline),
           data: this.makeChartPoints(timeline),
+          related: response.data.related,
           loader: false
         });
         return this.postSearchHistory(trend);
@@ -101,6 +103,7 @@ class App extends React.Component {
         collectData={this.collectData}
         storyPoint={this.state.storyPoint}
         history={this.state.history}
+        related={this.state.related}
       />
     );
   }

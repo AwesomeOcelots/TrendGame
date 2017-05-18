@@ -11,8 +11,8 @@ const app = express();
 const IP = '127.0.0.1';
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static(__dirname + '/client/public'));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/client/public'));
 app.use(morgan('tiny'));
 worker.worker(`http://${IP}:${PORT}/api/worker`);
 
@@ -31,7 +31,7 @@ app.get('/api', (req, res) => {
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
   trend = cleanData.prepForAylien(trend);
-
+  
   makeTimeline(trend, (err, data) => {
     if (err) {
       res.status(500).send(err);
