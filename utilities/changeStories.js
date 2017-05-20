@@ -17,12 +17,10 @@ module.exports = (direction, queryString, time, callback) => {
         if (err) {
           callback(err, null);
         } else {
-          console.log('NEW BODY STORIES: ', newStories)
           callback(null, newStories);
         }
       })
     } else {
-      console.log('NEW TITLE STORIES: ', newStories)
       callback(null, newStories);
     }
   })

@@ -21,7 +21,7 @@ const ArticleList = ({ trend, storyPoint, changeStories, changeBack }) => {
                   <strong> Why</strong> did <strong className="text-lowercase">{trend}</strong> peak?
                 </div>
                 <button onClick={()=>{changeStories('prev')}} >prev week</button>
-                <button onClick={changeBack} >peak week</button>
+                <button onClick={changeBack} style={{marginLeft: '155px'}}>peak week</button>
                 <button onClick={()=>{changeStories('next')}} style={{float: 'right'}}>next week</button>
               </h2>
             </div>

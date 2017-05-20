@@ -43,7 +43,6 @@ app.get('/api/timeline', (req, res) => {
 });
 
 app.get('/api/stories', (req, res) => {
-  console.log('REQUEST IS: ', req.query)
   var direction = req.query.direction;
   var trend = req.query.trend;
   var time = req.query.time; 

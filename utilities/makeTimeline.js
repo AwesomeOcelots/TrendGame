@@ -14,8 +14,7 @@ const makeTimeline = (searchString, callback) => {
         if (err) {
           callback(err, null);
         } else {
-          const peaks = findPeaks(timeSeries);
-          console.log('PEAKS ARE :', peaks)       
+          const peaks = findPeaks(timeSeries);       
           getNews(searchString, peaks, 'title', (err, peakStories) => {
             if (err) {
               callback(err, null);
