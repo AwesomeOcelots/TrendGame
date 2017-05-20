@@ -1,7 +1,7 @@
 import React from 'react';
 import Article from './Article.jsx';
 
-const ArticleList = ({ trend, storyPoint }) => {
+const ArticleList = ({ trend, storyPoint, changeStories, changeBack }) => {
   let articles;
 
   if (storyPoint.hasOwnProperty('stories') && storyPoint.stories.length === 0) {
@@ -17,7 +17,12 @@ const ArticleList = ({ trend, storyPoint }) => {
           <div className="row">
             <div className="col">
               <h2 className="h4 mb-4">
-                <strong>Why</strong> did <strong className="text-lowercase">{trend}</strong> peak?
+                <div style={{textAlign: 'center'}}>
+                  <strong> Why</strong> did <strong className="text-lowercase">{trend}</strong> peak?
+                </div>
+                <button onClick={()=>{changeStories('prev')}} >prev week</button>
+                <button onClick={changeBack} style={{marginLeft: '155px'}}>peak week</button>
+                <button onClick={()=>{changeStories('next')}} style={{float: 'right'}}>next week</button>
               </h2>
             </div>
           </div>

@@ -4,7 +4,6 @@ const epoch = require('epoch.js');
 const formatStories = require('./aylienApiDataFormatter');
 
 const getStories = (queryString, peaks, scope, callback) => {
-
   // Format date query for API
   // 604800000 is 1 week in milliseconds
   const peakDate = new Date(peaks[0][0] * 1000);
@@ -46,7 +45,6 @@ const getStories = (queryString, peaks, scope, callback) => {
   };
 
   opts[scope] = queryString;
-
   apiInstance.listStories(opts, (error, data, response) => {
     if (error) {
       callback(error, null);
@@ -57,7 +55,6 @@ const getStories = (queryString, peaks, scope, callback) => {
         date: peaks[0][0],
         stories: formattedStories
       });
-
       callback(null, finalData);
     }
   });

@@ -12,6 +12,7 @@ class App extends React.Component {
       start: '',
       end: '',
       trend: '',
+      originalStories: {},
       storyPoint: {},
       loader: false,
       history: [],
@@ -44,6 +45,7 @@ class App extends React.Component {
           trend: trendCapitalized,
           start: timeline[0].date,
           end: timeline[timeline.length - 1].date,
+          originalStories: JSON.stringify(this.findStoryPoint(timeline)), 
           storyPoint: this.findStoryPoint(timeline),
           data: this.makeChartPoints(timeline),
           related: response.data.related,
@@ -67,6 +69,33 @@ class App extends React.Component {
       }
     });
     return dataTuple;
+  }
+
+  changeStories(direction) {
+    let trend = this.state.trend;
+    let time = this.state.storyPoint.date
+  
+    axios.get('/api/stories', {
+      params: { 
+        trend: trend,
+        time: time,
+        direction: direction
+      }
+    })
+    .then(response => {
+      var newStoryPoint = this.state.storyPoint;
+      newStoryPoint.stories = response.data[0].stories;
+      newStoryPoint.date = response.data[0].date;
+      this.setState({
+        storyPoint: newStoryPoint
+      });
+    })
+  }
+
+  changeBack() {
+    this.setState({
+      storyPoint: JSON.parse(this.state.originalStories)
+    })
   }
 
   findStoryPoint (timeline) {
@@ -104,6 +133,8 @@ class App extends React.Component {
         storyPoint={this.state.storyPoint}
         history={this.state.history}
         related={this.state.related}
+        changeStories={this.changeStories.bind(this)}
+        changeBack={this.changeBack.bind(this)}
       />
     );
   }

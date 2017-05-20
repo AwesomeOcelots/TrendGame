@@ -26,16 +26,16 @@ const makeTimeline = (searchString, callback) => {
                   const response = makeFinalData(timeSeries, peakStories, searchString, related);
                   callback(null, response);
                 }
-              });
+              })
             } else {
               const response = makeFinalData(timeSeries, peakStories, searchString, related);
               callback(null, response);
             }
-          });
+          })
         }
       })
     }
-  });
+  })
 };
 
 module.exports = makeTimeline;
