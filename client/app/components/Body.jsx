@@ -5,7 +5,7 @@ import History from './History';
 import ArticleList from './ArticleList';
 import RelatedSearches from './RelatedSearches';
 
-const Body = ({ collectData, history, related, chartData, storyPoint }) => {
+const Body = ({ collectData, history, related, chartData, storyPoint, changeStories, changeBack }) => {
   return (
     <div className="row">
       <div className="col col-m-10 offset-m-1 col-lg-8 offset-lg-2">
@@ -13,7 +13,10 @@ const Body = ({ collectData, history, related, chartData, storyPoint }) => {
         <History history={history} collectData={collectData}/>
         <RelatedSearches related={related} collectData={collectData} />
         <TrendChart chartData={chartData} storyPoint={storyPoint}/>
-        <ArticleList trend={chartData.trend} storyPoint={storyPoint}/>
+        <ArticleList trend={chartData.trend} 
+                     storyPoint={storyPoint} 
+                     changeStories={changeStories}
+                     changeBack={changeBack} />
       </div>
     </div>
   );

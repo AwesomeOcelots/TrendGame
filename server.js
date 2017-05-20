@@ -1,6 +1,7 @@
 const makeTimeline = require('./utilities/makeTimeline');
 const queries = require('./db/queries');
 const cleanData = require('./utilities/cleanSearch');
+const changeStories = require('./utilities/changeStories');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -26,7 +27,7 @@ app.get('/api', (req, res) => {
   res.send({
     version: '0.0.1'
   });
-});
+})
 
 app.get('/api/timeline', (req, res) => {
   let trend = req.query.q;
@@ -38,7 +39,21 @@ app.get('/api/timeline', (req, res) => {
     } else {
       res.status(200).send(data);
     }
-  });
+  })
+});
+
+app.get('/api/stories', (req, res) => {
+  console.log('REQUEST IS: ', req.query)
+  var direction = req.query.direction;
+  var trend = req.query.trend;
+  var time = req.query.time; 
+  changeStories(direction, trend, time, (err, data) => {
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.send(200, data);
+    }
+  })
 });
 
 app.post('/api/history', (req, res) => {

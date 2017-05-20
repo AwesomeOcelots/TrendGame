@@ -3,7 +3,7 @@ import Body from './Body';
 import Footer from './Footer';
 import Header from './Header';
 
-const Layout = ({ chartData, collectData, storyPoint, history, related}) => {
+const Layout = ({ chartData, collectData, storyPoint, history, related, changeStories, changeBack }) => {
   return (
     <div>
       <div className="container">
@@ -14,6 +14,8 @@ const Layout = ({ chartData, collectData, storyPoint, history, related}) => {
           storyPoint={storyPoint}
           history={history}
           related={related}
+          changeStories={changeStories}
+          changeBack={changeBack}
         />
       </div>
       <Footer/>

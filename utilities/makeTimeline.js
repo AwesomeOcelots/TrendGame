@@ -14,7 +14,8 @@ const makeTimeline = (searchString, callback) => {
         if (err) {
           callback(err, null);
         } else {
-          const peaks = findPeaks(timeSeries);       
+          const peaks = findPeaks(timeSeries);
+          console.log('PEAKS ARE :', peaks)       
           getNews(searchString, peaks, 'title', (err, peakStories) => {
             if (err) {
               callback(err, null);
@@ -26,16 +27,16 @@ const makeTimeline = (searchString, callback) => {
                   const response = makeFinalData(timeSeries, peakStories, searchString, related);
                   callback(null, response);
                 }
-              });
+              })
             } else {
               const response = makeFinalData(timeSeries, peakStories, searchString, related);
               callback(null, response);
             }
-          });
+          })
         }
       })
     }
-  });
+  })
 };
 
 module.exports = makeTimeline;
