@@ -85,6 +85,7 @@ class App extends React.Component {
     .then(response => {
       var newStoryPoint = this.state.storyPoint;
       newStoryPoint.stories = response.data[0].stories;
+      newStoryPoint.date = response.data[0].date;
       this.setState({
         storyPoint: newStoryPoint
       });

@@ -21,7 +21,7 @@ module.exports = (direction, queryString, time, callback) => {
         }
       })
     } else {
-      callback(null, newStories);
+      callback(null, newStories, time);
     }
   })
 }
