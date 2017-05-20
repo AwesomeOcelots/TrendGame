@@ -15,7 +15,7 @@ class Article extends React.Component {
   render() {
     return (
       <div className="col-12 col-md-6">
-        <a href={this.props.story.url} className="card-clickable">
+        <a href={this.props.story.url} target="_blank" className="card-clickable">
           <div className="card">
             <img
               className="card-img-top img-fluid"
