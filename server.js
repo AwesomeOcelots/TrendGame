@@ -12,9 +12,23 @@ const app = express();
 const IP = '127.0.0.1';
 const PORT = process.env.PORT || 8080;
 
+//sessions and oauth passport stuff
+const passport = require('passport');
+const session = require('express-session');
+const Router = require('react-router');
+
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/public'));
 app.use(morgan('tiny'));
+
+//passport config and implementation
+app.use(session({secret: 'dogsareawesome',
+				 saveUninitialized: true,
+				 resave: true}));
+require('./config/passport.js')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 worker.worker(`http://${IP}:${PORT}/api/worker`);
 
 if (!module.parent) {
@@ -86,6 +100,26 @@ app.get('/api/history', (req, res) => {
 app.get('/api/worker', (req, res) => {
   res.send("Im awake!!");
 });
+
+//The following are authentication routes
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
+
+app.get('/auth/facebook/callback', 
+	  passport.authenticate('facebook', { successRedirect: '/home',
+	                                      failureRedirect: '/login' }));
+
+app.get('/auth/google', passport.authenticate('google', {scope: ['profile','email']}));
+
+app.get('/auth/google/callback', 
+	  passport.authenticate('google', { successRedirect: '/home',
+	                                      failureRedirect: '/login' }));
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback', 
+	  passport.authenticate('twitter', { successRedirect: '/home',
+	                                      failureRedirect: '/login' }));
+
 
 app.use((req, res) => {
   res.status(404);
