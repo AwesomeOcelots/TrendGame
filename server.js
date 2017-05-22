@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 8080;
 //sessions and oauth passport stuff
 const passport = require('passport');
 const session = require('express-session');
-const Router = require('react-router');
+
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/public'));
@@ -105,22 +105,25 @@ app.get('/api/worker', (req, res) => {
 app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
 app.get('/auth/facebook/callback', 
-	  passport.authenticate('facebook', { successRedirect: '/home',
-	                                      failureRedirect: '/login' }));
+	  passport.authenticate('facebook', { successRedirect: '/',
+	                                      failureRedirect: '/' }));
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile','email']}));
 
 app.get('/auth/google/callback', 
-	  passport.authenticate('google', { successRedirect: '/home',
-	                                      failureRedirect: '/login' }));
+	  passport.authenticate('google', { successRedirect: '/',
+	                                      failureRedirect: '/' }));
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback', 
-	  passport.authenticate('twitter', { successRedirect: '/home',
-	                                      failureRedirect: '/login' }));
+	  passport.authenticate('twitter', { successRedirect: '/',
+	                                      failureRedirect: '/' }));
 
-
+app.get('/logout', function(req, res){
+		req.logout();
+		res.redirect('/');
+	})
 app.use((req, res) => {
   res.status(404);
   res.sendFile(__dirname + '/client/public/404.html');
