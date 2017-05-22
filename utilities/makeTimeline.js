@@ -8,15 +8,20 @@ const makeTimeline = (searchString, callback) => {
   
   queryTrend(searchString, (err, timeSeries) => {
     if (err) {
+      console.log("1", err);
       callback(err, null);
     } else {
+      console.log("2", err);
       queryRelated(searchString, (err, related) => {
         if (err) {
+          console.log("3", err);
           callback(err, null);
         } else {
+          console.log("4", err);
           const peaks = findPeaks(timeSeries);       
           getNews(searchString, peaks, 'title', (err, peakStories) => {
             if (err) {
+              console.log("5", err);
               callback(err, null);
             } else if (peakStories[0].stories[0] === undefined) {
               getNews(searchString, peaks, 'body', (err, peakStories) => {
